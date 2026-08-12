@@ -1,0 +1,15 @@
+# SECRETS - do not delete this line
+.env
+
+# Python junk
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# NOTE: data/flightdip.db is NOT ignored on purpose.
+# The robot commits it back after every sweep. That's the whole point.
