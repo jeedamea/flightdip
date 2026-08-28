@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>FlightDip Dashboard</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  :root {
+    --bg: #fdfcfa; --surface: #f4f2ee; --border: #e1e0d9;
+    --text: #1f1e1c; --text-secondary: #6b6a65; --text-muted: #898781;
+    --accent: #2a78d6; --accent2: #eb6834; --radius: 10px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--bg); color: var(--text);
+    max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem;
+  }
+  h1 { font-size: 20px; font-weight: 600; margin: 0 0 4px; }
+  p.sub { color: var(--text-secondary); font-size: 13px; margin: 0 0 1.5rem; }
+  .toolbar {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; margin-bottom: 1.25rem; flex-wrap: wrap;
+  }
+  .toolbar-left, .toolbar-right { display: flex; align-items: center; gap: 10px; }
+  label { font-size: 13px; color: var(--text-secondary); }
+  select, button {
+    font-family: inherit; font-size: 14px; padding: 7px 12px;
+    border: 1px solid var(--border); border-radius: 8px;
+    background: white; cursor: pointer;
+  }
+  button:hover { background: var(--surface); }
+  #fileStatus { font-size: 12px; color: var(--text-muted); }
+  #emptyState {
+    text-align: center; padding: 3rem 1rem; color: var(--text-secondary);
+    font-size: 14px; border: 1px dashed var(--border); border-radius: var(--radius);
+  }
+  code {
+    font-family: ui-monospace, monospace; background: var(--surface);
+    padding: 2px 6px; border-radius: 4px; font-size: 13px;
+  }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 1.25rem; }
+  .stat-card { background: var(--surface); border-radius: var(--radius); padding: 1rem; }
+  .stat-card p:first-child { font-size: 13px; color: var(--text-secondary); margin: 0 0 4px; }
+  .stat-card p:last-child { font-size: 24px; font-weight: 500; margin: 0; }
+  .chart-caption { font-size: 13px; color: var(--text-secondary); margin: 0 0 8px; }
+  .chart-wrap { position: relative; width: 100%; height: 320px; }
+  #mainView, #drillView { display: none; }
+  #backBtn { margin-bottom: 1rem; }
+</style>
+</head>
+<body>
+
+<h1>FlightDip</h1>
+<p class="sub">Seasonal price chart per route — click a month to see the buy-timing curve</p>
+
+<div class="toolbar">
+  <div class="toolbar-left">
+    <label>Route</label>
+    <select id="routeSelect"></select>
+  </div>
+  <div class="toolbar-right">
+    <input type="file" id="fileInput" accept="application/json" style="display:none;" />
+    <button id="loadBtn">Load export.json</button>
+    <span id="fileStatus">no data loaded</span>
+  </div>
+</div>
+
+<div id="emptyState">
+  Run <code>python export.py</code> then click "Load export.json" above and
+  select the file it wrote to <code>data/export.json</code>.
+</div>
+
+<div id="mainView">
+  <div class="stats">
+    <div class="stat-card"><p>Cheapest month</p><p id="statCheap">-</p></div>
+    <div class="stat-card"><p>Priciest month</p><p id="statPricey">-</p></div>
+    <div class="stat-card"><p>Seasonal swing</p><p id="statSwing">-</p></div>
+  </div>
+  <p class="chart-caption">Average price by departure month · bars show min–max range · click a point to drill in</p>
+  <div class="chart-wrap"><canvas id="seasonChart"></canvas></div>
+</div>
+
+<div id="drillView">
+  <button id="backBtn">← Back to seasonality</button>
+  <div class="stats">
+    <div class="stat-card"><p>Best days-before to buy</p><p id="statBest">-</p></div>
+    <div class="stat-card"><p>Std deviation</p><p id="statStd">-</p></div>
+    <div class="stat-card"><p>Data points</p><p id="statN">-</p></div>
+  </div>
+  <p class="chart-caption" id="drillTitle"></p>
+  <div class="chart-wrap"><canvas id="curveChart"></canvas></div>
+</div>
+
+<script>
+let DATA = null, seasonChart = null, curveChart = null, currentRoute = null;
+
+const errorBarPlugin = {
+  id: 'errorBars',
+  afterDatasetsDraw(chart) {
+    const meta = chart.getDatasetMeta(0);
+    if (!meta || !chart.data.datasets[0].errRange) return;
+    const ctx = chart.ctx;
+    const range = chart.data.datasets[0].errRange;
+    ctx.save();
+    ctx.strokeStyle = '#2a78d6';
+    ctx.lineWidth = 1.5;
+    meta.data.forEach((point, i) => {
+      const yScale = chart.scales.y;
+      const yMin = yScale.getPixelForValue(range[i].min);
+      const yMax = yScale.getPixelForValue(range[i].max);
+      const x = point.x;
+      ctx.beginPath();
+      ctx.moveTo(x, yMin); ctx.lineTo(x, yMax);
+      ctx.moveTo(x - 5, yMin); ctx.lineTo(x + 5, yMin);
+      ctx.moveTo(x - 5, yMax); ctx.lineTo(x + 5, yMax);
+      ctx.stroke();
+    });
+    ctx.restore();
+  }
+};
+
+function monthLabel(dateStr) {
+  const d = new Date(dateStr + 'T00:00:00');
+  return d.toLocaleDateString('en-GB', { month: 'short', year: '2-digit' });
+}
+
+function renderSeason(route) {
+  currentRoute = route;
+  const months = DATA.routes[route];
+  document.getElementById('emptyState').style.display = 'none';
+  document.getElementById('mainView').style.display = 'block';
+  document.getElementById('drillView').style.display = 'none';
+
+  const avgs = months.map(m => m.avg);
+  const cheapIdx = avgs.indexOf(Math.min(...avgs));
+  const priceyIdx = avgs.indexOf(Math.max(...avgs));
+  const swing = Math.round((Math.max(...avgs) - Math.min(...avgs)) / Math.min(...avgs) * 100);
+
+  document.getElementById('statCheap').textContent = monthLabel(months[cheapIdx].departure_date) + '  £' + Math.round(months[cheapIdx].avg);
+  document.getElementById('statPricey').textContent = monthLabel(months[priceyIdx].departure_date) + '  £' + Math.round(months[priceyIdx].avg);
+  document.getElementById('statSwing').textContent = swing + '%';
+
+  if (seasonChart) seasonChart.destroy();
+  seasonChart = new Chart(document.getElementById('seasonChart'), {
+    type: 'line',
+    data: {
+      labels: months.map(m => monthLabel(m.departure_date)),
+      datasets: [{
+        label: 'Average price', data: avgs,
+        borderColor: '#2a78d6', backgroundColor: '#2a78d6',
+        pointRadius: 5, pointHoverRadius: 7, tension: 0.15,
+        errRange: months.map(m => ({ min: m.min, max: m.max }))
+      }]
+    },
+    plugins: [errorBarPlugin],
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      onClick: (evt, els) => { if (els.length) drillInto(months[els[0].index]); },
+      onHover: (evt, els) => { evt.native.target.style.cursor = els.length ? 'pointer' : 'default'; },
+      scales: {
+        y: { ticks: { callback: v => '£' + v } },
+        x: { ticks: { autoSkip: false, maxRotation: 0 } }
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => {
+              const r = months[ctx.dataIndex];
+              return ['avg £' + Math.round(r.avg), 'range £' + r.min + '-£' + r.max];
+            }
+          }
+        }
+      }
+    }
+  });
+}
+
+function drillInto(monthData) {
+  document.getElementById('mainView').style.display = 'none';
+  document.getElementById('drillView').style.display = 'block';
+
+  const curve = monthData.curve;
+  const best = curve.reduce((a, b) => b.price < a.price ? b : a);
+  const prices = curve.map(c => c.price);
+  const avg = prices.reduce((a, b) => a + b, 0) / prices.length;
+  const variance = prices.reduce((a, b) => a + (b - avg) ** 2, 0) / prices.length;
+  const std = Math.round(Math.sqrt(variance));
+
+  document.getElementById('statBest').textContent = best.days_before + ' days out';
+  document.getElementById('statStd').textContent = '£' + std;
+  document.getElementById('statN').textContent = curve.length;
+  document.getElementById('drillTitle').textContent =
+    currentRoute + ' departing ' + monthData.departure_date + ' · price vs days before departure';
+
+  const sorted = [...curve].sort((a, b) => b.days_before - a.days_before);
+
+  if (curveChart) curveChart.destroy();
+  curveChart = new Chart(document.getElementById('curveChart'), {
+    type: 'line',
+    data: {
+      labels: sorted.map(c => c.days_before),
+      datasets: [{
+        label: 'Price', data: sorted.map(c => c.price),
+        borderColor: '#eb6834', backgroundColor: 'rgba(235,104,52,0.08)',
+        fill: true, pointRadius: 0, pointHoverRadius: 5,
+        borderWidth: 2, tension: 0.2
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      scales: {
+        y: { ticks: { callback: v => '£' + v } },
+        x: {
+          reverse: true,
+          title: { display: true, text: 'days before departure' },
+          ticks: { maxTicksLimit: 10 }
+        }
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => '£' + ctx.parsed.y } }
+      }
+    }
+  });
+}
+
+document.getElementById('backBtn').addEventListener('click', () => renderSeason(currentRoute));
+document.getElementById('loadBtn').addEventListener('click', () => document.getElementById('fileInput').click());
+
+document.getElementById('fileInput').addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (evt) => {
+    try {
+      DATA = JSON.parse(evt.target.result);
+      const routes = Object.keys(DATA.routes);
+      const sel = document.getElementById('routeSelect');
+      sel.innerHTML = routes.map(r => `<option value="${r}">${r}</option>`).join('');
+      document.getElementById('fileStatus').textContent = file.name + ' loaded';
+      renderSeason(routes[0]);
+    } catch (err) {
+      document.getElementById('fileStatus').textContent = 'invalid JSON file';
+    }
+  };
+  reader.readAsText(file);
+});
+
+document.getElementById('routeSelect').addEventListener('change', e => renderSeason(e.target.value));
+</script>
+</body>
+</html>
