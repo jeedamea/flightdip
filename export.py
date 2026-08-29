@@ -40,22 +40,35 @@ def fallback_rate(fastest_mins):
     return FALLBACK_BANDS[-1][1]
 
 
-def value_per_hour_for_route(all_offers_this_route):
+def value_per_hour_for(offers):
     """
-    Try to derive £/hour of travel time from this route's OWN offers,
-    instead of guessing.
+    Derive £/hour of travel time from a single month's OWN offers - not
+    pooled across the whole route.
 
-    Method: linear regression of price against duration across every offer
-    seen on this route. If longer options are systematically cheaper (the
+    Why per-month, not per-route: price swings hugely with season, for
+    reasons that have nothing to do with duration (December costs more
+    because it's December, not because December flights are longer).
+    Pooling all 12 months together let that seasonal swing swamp the real
+    duration signal - the regression came back timid and wrong because it
+    was mostly fitting season, not time. Scoping to one departure date at
+    a time holds season fixed, so what's left really is the duration
+    effect.
+
+    Method: linear regression of price against duration across this
+    month's offers. If longer options are systematically cheaper (the
     normal case - connections cost less than directs), the slope is
-    negative, and its size in £-per-minute is exactly what the market is
-    charging for time saved. Flip the sign, convert to £/hour.
+    negative, and its size in £-per-minute is what the market is charging
+    for time saved on THIS specific month. Flip the sign, convert to
+    £/hour.
 
     Falls back to a rough duration-based guess when there isn't enough
-    data to trust a slope - a line through 3 points is noise, not a
-    finding.
+    data in this month alone to trust a slope - a line through 3 points
+    is noise, not a finding. Expect the fallback to fire often until
+    sweeps accumulate, since restricting to one month means less data per
+    calculation than pooling ever gave us - that's the honest trade for
+    a number that actually means what it claims to.
     """
-    timed = [o for o in all_offers_this_route if o.get("duration_mins")]
+    timed = [o for o in offers if o.get("duration_mins")]
     durations = [o["duration_mins"] for o in timed]
 
     enough_data = (len(timed) >= MIN_OFFERS_FOR_REGRESSION
@@ -86,13 +99,14 @@ def value_per_hour_for_route(all_offers_this_route):
     return {"rate": max(rate, 1), "method": "calculated", "n_offers": n}
 
 
-def build_recommendations(offers, vph_info):
+def build_recommendations(offers):
     """
     Cheapest, fastest, and a value-of-time-balanced shortlist.
 
-    vph_info comes from value_per_hour_for_route() - either a real rate
-    derived from this route's own price/duration relationship, or a
-    fallback guess when there wasn't enough data to calculate one.
+    The £/hour rate is calculated fresh from THIS month's own offers (see
+    value_per_hour_for) - so December's rate and April's rate can
+    genuinely differ, rather than one blended number pretending to cover
+    every season.
     """
     if not offers:
         return None
@@ -102,6 +116,7 @@ def build_recommendations(offers, vph_info):
         return {"cheapest": min(offers, key=lambda o: o["price"]),
                 "fastest": None, "recommended": [], "value_per_hour": None}
 
+    vph_info = value_per_hour_for(offers)
     fastest_mins = min(o["duration_mins"] for o in timed)
     vph = vph_info["rate"]
     cheapest = min(offers, key=lambda o: o["price"])
@@ -205,12 +220,6 @@ def main():
                 "collected_date": r["collected_date"],
             })
 
-        # Calculate this route's value-of-time rate ONCE, from every offer
-        # ever seen on it (pooled across months) - more data than any
-        # single month has alone, so the regression has a fighting chance.
-        all_offers_this_route = [o for lst in offers_by_month.values() for o in lst]
-        vph_info = value_per_hour_for_route(all_offers_this_route)
-
         months = []
         for dep_date in sorted(by_month.keys()):
             prices = by_month[dep_date]
@@ -241,7 +250,7 @@ def main():
                 "offers": offers,
                 "weekday_avg": weekday_avg,
                 "cheapest_airline": cheapest_airline,
-                "recommendations": build_recommendations(offers, vph_info),
+                "recommendations": build_recommendations(offers),
             })
 
         out["routes"][route] = months
