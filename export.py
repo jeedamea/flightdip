@@ -18,7 +18,7 @@ DB_PATH = "data/flightdip.db"
 OUT_PATH = "data/export.json"
 
 # Fallback bands, in £/hour, used only when there isn't enough offer data
-# on a route yet to calculate a real rate. See value_per_hour_for_route().
+# in a given month yet to calculate a real rate. See value_per_hour_for().
 FALLBACK_BANDS = [
     (3,  10), (6,  15), (10, 20), (999, 25),
 ]
