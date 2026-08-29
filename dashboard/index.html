@@ -46,6 +46,20 @@
   .offers-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); }
   .offers-table tr:first-child td { font-weight: 600; }
   .no-offers { color: var(--text-secondary); font-size: 13px; padding: 1rem 0; }
+  .reco-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; }
+  .reco-card { border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem; }
+  .reco-card .tag { font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em; color: var(--text-muted); }
+  .reco-card .price { font-size: 20px; font-weight: 600; margin: 4px 0 2px; }
+  .reco-card .detail { font-size: 12px; color: var(--text-secondary); }
+  .reco-card.cheapest { border-color: #1baf7a; }
+  .reco-card.fastest { border-color: #2a78d6; }
+  .reco-card.balanced { border-color: #eb6834; }
+  .section-title { font-size: 13px; font-weight: 600; margin: 0 0 8px; }
+  .weekday-row { display: flex; align-items: flex-end; gap: 6px; height: 90px; }
+  .weekday-bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
+  .weekday-bar { width: 100%; background: var(--accent); border-radius: 3px 3px 0 0; min-height: 3px; }
+  .weekday-label { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+  .weekday-val { font-size: 10px; color: var(--text-secondary); }
 </style>
 </head>
 <body>
@@ -95,10 +109,12 @@
     <div class="stat-card"><p>Std deviation</p><p id="statStd">-</p></div>
     <div class="stat-card"><p>Data points</p><p id="statN">-</p></div>
   </div>
-  <div class="chart-header">
-    <p class="chart-caption" id="drillTitle"></p>
-    <span style="font-size:12px; color:var(--text-muted);">solid = raw price &middot; dashed = 7-pt trend &middot; scroll for more</span>
-  </div>
+  <div id="drillTitle" style="font-size:13px; color:var(--text-secondary); margin-bottom:1rem;"></div>
+
+  <div id="recoSection" style="margin-bottom:1.5rem;"></div>
+  <div id="weekdaySection" style="margin-bottom:1.5rem;"></div>
+
+  <p class="chart-caption" style="margin-bottom:8px;">solid = raw price &middot; dashed = 7-pt trend &middot; scroll for more</p>
   <div id="scrollWrap"><div id="curveInner"><canvas id="curveChart"></canvas></div></div>
 
   <div style="display:flex; align-items:center; justify-content:space-between; margin:1.5rem 0 8px;">
@@ -201,6 +217,56 @@ function renderOffers(offers, filterLabel) {
     </table>`;
 }
 
+function offerLine(o) {
+  return `${o.airline || 'unknown'} &middot; ${stopsLabel(o.stops)} &middot; ${o.duration_mins ? formatMins(o.duration_mins) : '?'} &middot; ${o.days_before}d out`;
+}
+
+function renderRecommendations(reco) {
+  const el = document.getElementById('recoSection');
+  if (!reco) {
+    el.innerHTML = '<p class="no-offers">No offer data yet to base recommendations on - these fill in as more sweeps land.</p>';
+    return;
+  }
+
+  const cards = [];
+  if (reco.cheapest) {
+    cards.push(`<div class="reco-card cheapest"><p class="tag">Absolute cheapest</p><p class="price">£${reco.cheapest.price}</p><p class="detail">${offerLine(reco.cheapest)}</p></div>`);
+  }
+  if (reco.fastest) {
+    cards.push(`<div class="reco-card fastest"><p class="tag">Fastest</p><p class="price">£${reco.fastest.price}</p><p class="detail">${offerLine(reco.fastest)}</p></div>`);
+  }
+  (reco.recommended || []).slice(0, 2).forEach((o, i) => {
+    const calc = o.calc ? `<p class="detail" style="margin-top:4px; font-family:ui-monospace,monospace; font-size:11px;">${o.calc}</p>` : '';
+    cards.push(`<div class="reco-card balanced"><p class="tag">${i === 0 ? 'Recommended' : 'Also worth it'}</p><p class="price">£${o.price}</p><p class="detail">${offerLine(o)}</p>${calc}</div>`);
+  });
+
+  const vphNote = reco.value_per_hour
+    ? (reco.value_per_hour_method === 'calculated'
+        ? `<span style="color:#1baf7a;">&#9679;</span> calculated from this route's own ${reco.value_per_hour_n} offers: extra travel time is worth £${reco.value_per_hour}/hr here`
+        : `<span style="color:#e0a02c;">&#9679;</span> only ${reco.value_per_hour_n} offer(s) logged so far - using a rough £${reco.value_per_hour}/hr estimate until there's enough data to calculate a real one`)
+    : '';
+
+  el.innerHTML = `<p class="section-title">Recommendations</p>${vphNote ? `<p class="detail" style="margin:0 0 10px;">${vphNote}</p>` : ''}<div class="reco-grid">${cards.join('')}</div>`;
+}
+
+function renderWeekday(weekdayAvg) {
+  const el = document.getElementById('weekdaySection');
+  const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const vals = days.map(d => weekdayAvg[d]).filter(v => v != null);
+  if (!vals.length) { el.innerHTML = ''; return; }
+
+  const max = Math.max(...vals), min = Math.min(...vals);
+  const bars = days.map(d => {
+    const v = weekdayAvg[d];
+    if (v == null) return `<div class="weekday-bar-wrap"><div class="weekday-val">-</div><div class="weekday-bar" style="height:2px; background:var(--border);"></div><div class="weekday-label">${d}</div></div>`;
+    const h = max === min ? 60 : 20 + ((v - min) / (max - min)) * 70;
+    const isMin = v === min;
+    return `<div class="weekday-bar-wrap"><div class="weekday-val">£${Math.round(v)}</div><div class="weekday-bar" style="height:${h}%; ${isMin ? 'background:#1baf7a;' : ''}"></div><div class="weekday-label">${d}</div></div>`;
+  }).join('');
+
+  el.innerHTML = `<p class="section-title">Average price by day of week</p><div class="weekday-row">${bars}</div>`;
+}
+
 function styleTabs() {
   document.querySelectorAll('.metricTab').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.metric === currentMetric);
@@ -289,6 +355,9 @@ function drillInto(monthData) {
   document.getElementById('statN').textContent = sorted.length;
   document.getElementById('drillTitle').textContent =
     currentRoute + ' departing ' + monthData.departure_date + ' - price vs days before departure';
+
+  renderRecommendations(monthData.recommendations);
+  renderWeekday(monthData.weekday_avg || {});
 
   currentOffers = monthData.offers || [];
   renderOffers(currentOffers, 'All offers this month, cheapest first');
