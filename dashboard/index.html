@@ -18,46 +18,47 @@
   }
   h1 { font-size: 20px; font-weight: 600; margin: 0 0 4px; }
   p.sub { color: var(--text-secondary); font-size: 13px; margin: 0 0 1.5rem; }
-  .toolbar {
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 12px; margin-bottom: 1.25rem; flex-wrap: wrap;
-  }
-  .toolbar-left, .toolbar-right { display: flex; align-items: center; gap: 10px; }
+  .toolbar { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:1.25rem; flex-wrap:wrap; }
+  .toolbar-left, .toolbar-right { display:flex; align-items:center; gap:10px; }
   label { font-size: 13px; color: var(--text-secondary); }
-  select, button {
-    font-family: inherit; font-size: 14px; padding: 7px 12px;
-    border: 1px solid var(--border); border-radius: 8px;
-    background: white; cursor: pointer;
-  }
+  select, button { font-family: inherit; font-size: 14px; padding: 7px 12px; border: 1px solid var(--border); border-radius: 8px; background: white; cursor: pointer; }
   button:hover { background: var(--surface); }
   #fileStatus { font-size: 12px; color: var(--text-muted); }
-  #emptyState {
-    text-align: center; padding: 3rem 1rem; color: var(--text-secondary);
-    font-size: 14px; border: 1px dashed var(--border); border-radius: var(--radius);
-  }
-  code {
-    font-family: ui-monospace, monospace; background: var(--surface);
-    padding: 2px 6px; border-radius: 4px; font-size: 13px;
-  }
-  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 1.25rem; }
+  #haulBadge { font-size: 12px; padding: 3px 10px; border-radius: 12px; background: var(--surface); color: var(--text-secondary); }
+  #emptyState { text-align:center; padding:3rem 1rem; color:var(--text-secondary); font-size:14px; border:1px dashed var(--border); border-radius:var(--radius); }
+  code { font-family: ui-monospace, monospace; background: var(--surface); padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+  .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:1.25rem; }
   .stat-card { background: var(--surface); border-radius: var(--radius); padding: 1rem; }
   .stat-card p:first-child { font-size: 13px; color: var(--text-secondary); margin: 0 0 4px; }
   .stat-card p:last-child { font-size: 24px; font-weight: 500; margin: 0; }
-  .chart-caption { font-size: 13px; color: var(--text-secondary); margin: 0 0 8px; }
+  .chart-caption { font-size: 13px; color: var(--text-secondary); margin: 0; }
   .chart-wrap { position: relative; width: 100%; height: 320px; }
   #mainView, #drillView { display: none; }
   #backBtn { margin-bottom: 1rem; }
+  .chart-header { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:8px; }
+  #metricTabs { display:flex; gap:2px; background:var(--surface); border-radius:8px; padding:3px; }
+  .metricTab { border:none; background:transparent; padding:6px 12px; border-radius:6px; font-size:13px; cursor:pointer; font-family:inherit; }
+  .metricTab.active { background:white; font-weight:600; box-shadow:0 1px 2px rgba(0,0,0,0.08); }
+  #scrollWrap { width: 100%; overflow-x: auto; }
+  #curveInner { position: relative; height: 320px; }
+  .offers-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .offers-table th { text-align: left; color: var(--text-secondary); font-weight: 500; padding: 6px 10px; border-bottom: 1px solid var(--border); }
+  .offers-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); }
+  .offers-table tr:first-child td { font-weight: 600; }
+  .no-offers { color: var(--text-secondary); font-size: 13px; padding: 1rem 0; }
 </style>
 </head>
 <body>
 
 <h1>FlightDip</h1>
-<p class="sub">Seasonal price chart per route — click a month to see the buy-timing curve</p>
+<p class="sub">Seasonal price chart per route &middot; click a month to see the buy-timing curve</p>
 
 <div class="toolbar">
   <div class="toolbar-left">
     <label>Route</label>
     <select id="routeSelect"></select>
+    <span id="haulBadge"></span>
+    <span id="durationBadge" style="font-size:12px; color:var(--text-muted);"></span>
   </div>
   <div class="toolbar-right">
     <input type="file" id="fileInput" accept="application/json" style="display:none;" />
@@ -67,8 +68,7 @@
 </div>
 
 <div id="emptyState">
-  Run <code>python export.py</code> then click "Load export.json" above and
-  select the file it wrote to <code>data/export.json</code>.
+  Run <code>python export.py</code> then click "Load export.json" and select <code>data/export.json</code>.
 </div>
 
 <div id="mainView">
@@ -77,23 +77,50 @@
     <div class="stat-card"><p>Priciest month</p><p id="statPricey">-</p></div>
     <div class="stat-card"><p>Seasonal swing</p><p id="statSwing">-</p></div>
   </div>
-  <p class="chart-caption">Average price by departure month · bars show min–max range · click a point to drill in</p>
+  <div class="chart-header">
+    <p class="chart-caption">bars show min-max range &middot; click a point to drill in</p>
+    <div id="metricTabs">
+      <button data-metric="avg" class="metricTab">Average</button>
+      <button data-metric="min" class="metricTab">Lowest</button>
+      <button data-metric="max" class="metricTab">Highest</button>
+    </div>
+  </div>
   <div class="chart-wrap"><canvas id="seasonChart"></canvas></div>
 </div>
 
 <div id="drillView">
-  <button id="backBtn">← Back to seasonality</button>
+  <button id="backBtn">&larr; Back to seasonality</button>
   <div class="stats">
-    <div class="stat-card"><p>Best days-before to buy</p><p id="statBest">-</p></div>
+    <div class="stat-card"><p>Best days-before (trend)</p><p id="statBest">-</p></div>
     <div class="stat-card"><p>Std deviation</p><p id="statStd">-</p></div>
     <div class="stat-card"><p>Data points</p><p id="statN">-</p></div>
   </div>
-  <p class="chart-caption" id="drillTitle"></p>
-  <div class="chart-wrap"><canvas id="curveChart"></canvas></div>
+  <div class="chart-header">
+    <p class="chart-caption" id="drillTitle"></p>
+    <span style="font-size:12px; color:var(--text-muted);">solid = raw price &middot; dashed = 7-pt trend &middot; scroll for more</span>
+  </div>
+  <div id="scrollWrap"><div id="curveInner"><canvas id="curveChart"></canvas></div></div>
+
+  <div style="display:flex; align-items:center; justify-content:space-between; margin:1.5rem 0 8px;">
+    <p class="chart-caption" id="offersFilterLabel">All offers this month, cheapest first</p>
+    <button id="clearFilterBtn" style="display:none; font-size:12px; padding:4px 10px;">Clear filter</button>
+  </div>
+  <div id="offersTableWrap"></div>
 </div>
 
 <script>
-let DATA = null, seasonChart = null, curveChart = null, currentRoute = null;
+let DATA = null, seasonChart = null, curveChart = null, currentRoute = null, currentMetric = 'avg', currentOffers = [];
+
+const haulMap = {
+  'MAN-BKK': 'Long haul', 'SIN-JFK': 'Ultra long haul',
+  'MAN-AMS': 'Short haul', 'MAN-BCN': 'Short haul', 'SIN-KUL': 'Short haul'
+};
+
+const metricMeta = {
+  avg: { label: 'Average price', color: '#2a78d6' },
+  min: { label: 'Lowest ever seen', color: '#1baf7a' },
+  max: { label: 'Highest ever seen', color: '#e34948' }
+};
 
 const errorBarPlugin = {
   id: 'errorBars',
@@ -103,7 +130,7 @@ const errorBarPlugin = {
     const ctx = chart.ctx;
     const range = chart.data.datasets[0].errRange;
     ctx.save();
-    ctx.strokeStyle = '#2a78d6';
+    ctx.strokeStyle = '#b7b5ad';
     ctx.lineWidth = 1.5;
     meta.data.forEach((point, i) => {
       const yScale = chart.scales.y;
@@ -125,13 +152,76 @@ function monthLabel(dateStr) {
   return d.toLocaleDateString('en-GB', { month: 'short', year: '2-digit' });
 }
 
+function movingAvg(vals, window) {
+  const out = [];
+  for (let i = 0; i < vals.length; i++) {
+    const start = Math.max(0, i - Math.floor(window / 2));
+    const end = Math.min(vals.length, i + Math.ceil(window / 2));
+    const slice = vals.slice(start, end);
+    out.push(slice.reduce((a, b) => a + b, 0) / slice.length);
+  }
+  return out;
+}
+
+function formatMins(mins) {
+  const h = Math.floor(mins / 60), m = mins % 60;
+  return `${h}h ${String(m).padStart(2, '0')}m`;
+}
+
+function stopsLabel(stops) {
+  if (stops === 0) return 'Direct';
+  if (stops === 1) return '1 stop';
+  return stops + ' stops';
+}
+
+function renderOffers(offers, filterLabel) {
+  document.getElementById('offersFilterLabel').textContent = filterLabel;
+  document.getElementById('clearFilterBtn').style.display = filterLabel.startsWith('All') ? 'none' : 'inline-block';
+  const wrap = document.getElementById('offersTableWrap');
+
+  if (!offers.length) {
+    wrap.innerHTML = '<p class="no-offers">No offer data collected for this yet - price history is separate from live offers, and offers get logged less often.</p>';
+    return;
+  }
+
+  const sorted = [...offers].sort((a, b) => a.price - b.price);
+  const rows = sorted.map(o => `
+    <tr>
+      <td>£${o.price}</td>
+      <td>${o.airline || 'unknown'}</td>
+      <td>${stopsLabel(o.stops)}</td>
+      <td>${o.duration_mins ? formatMins(o.duration_mins) : '-'}</td>
+      <td>${o.days_before}d out</td>
+    </tr>`).join('');
+
+  wrap.innerHTML = `
+    <table class="offers-table">
+      <thead><tr><th>Price</th><th>Airline</th><th>Stops</th><th>Duration</th><th>Days before</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+
+function styleTabs() {
+  document.querySelectorAll('.metricTab').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.metric === currentMetric);
+  });
+}
+
 function renderSeason(route) {
   currentRoute = route;
   const months = DATA.routes[route];
   document.getElementById('emptyState').style.display = 'none';
   document.getElementById('mainView').style.display = 'block';
   document.getElementById('drillView').style.display = 'none';
+  document.getElementById('haulBadge').textContent = haulMap[route] || '';
 
+  const dur = (DATA.duration || {})[route];
+  document.getElementById('durationBadge').textContent = dur
+    ? `\u2248${formatMins(dur.avg_mins)} \u00b7 usually ${dur.typical_stops} stop(s)`
+    : 'duration data not collected yet';
+  styleTabs();
+
+  const values = months.map(m => m[currentMetric]);
   const avgs = months.map(m => m.avg);
   const cheapIdx = avgs.indexOf(Math.min(...avgs));
   const priceyIdx = avgs.indexOf(Math.max(...avgs));
@@ -142,13 +232,14 @@ function renderSeason(route) {
   document.getElementById('statSwing').textContent = swing + '%';
 
   if (seasonChart) seasonChart.destroy();
+  const meta = metricMeta[currentMetric];
   seasonChart = new Chart(document.getElementById('seasonChart'), {
     type: 'line',
     data: {
       labels: months.map(m => monthLabel(m.departure_date)),
       datasets: [{
-        label: 'Average price', data: avgs,
-        borderColor: '#2a78d6', backgroundColor: '#2a78d6',
+        label: meta.label, data: values,
+        borderColor: meta.color, backgroundColor: meta.color,
         pointRadius: 5, pointHoverRadius: 7, tension: 0.15,
         errRange: months.map(m => ({ min: m.min, max: m.max }))
       }]
@@ -164,67 +255,82 @@ function renderSeason(route) {
       },
       plugins: {
         legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: ctx => {
-              const r = months[ctx.dataIndex];
-              return ['avg £' + Math.round(r.avg), 'range £' + r.min + '-£' + r.max];
-            }
-          }
-        }
+        tooltip: { callbacks: { label: ctx => {
+          const r = months[ctx.dataIndex];
+          return [meta.label + ' £' + Math.round(ctx.parsed.y), 'full range £' + r.min + '-£' + r.max];
+        } } }
       }
     }
   });
 }
 
+document.getElementById('metricTabs').addEventListener('click', (e) => {
+  const btn = e.target.closest('.metricTab');
+  if (!btn) return;
+  currentMetric = btn.dataset.metric;
+  renderSeason(currentRoute);
+});
+
 function drillInto(monthData) {
   document.getElementById('mainView').style.display = 'none';
   document.getElementById('drillView').style.display = 'block';
 
-  const curve = monthData.curve;
-  const best = curve.reduce((a, b) => b.price < a.price ? b : a);
-  const prices = curve.map(c => c.price);
+  const sorted = [...monthData.curve].sort((a, b) => b.days_before - a.days_before);
+  const prices = sorted.map(c => c.price);
+  const trend = movingAvg(prices, 7);
+
   const avg = prices.reduce((a, b) => a + b, 0) / prices.length;
   const variance = prices.reduce((a, b) => a + (b - avg) ** 2, 0) / prices.length;
   const std = Math.round(Math.sqrt(variance));
+  const bestIdx = trend.indexOf(Math.min(...trend));
 
-  document.getElementById('statBest').textContent = best.days_before + ' days out';
+  document.getElementById('statBest').textContent = sorted[bestIdx].days_before + ' days out';
   document.getElementById('statStd').textContent = '£' + std;
-  document.getElementById('statN').textContent = curve.length;
+  document.getElementById('statN').textContent = sorted.length;
   document.getElementById('drillTitle').textContent =
-    currentRoute + ' departing ' + monthData.departure_date + ' · price vs days before departure';
+    currentRoute + ' departing ' + monthData.departure_date + ' - price vs days before departure';
 
-  const sorted = [...curve].sort((a, b) => b.days_before - a.days_before);
+  currentOffers = monthData.offers || [];
+  renderOffers(currentOffers, 'All offers this month, cheapest first');
+
+  const pxPerPoint = 14;
+  const width = Math.max(600, sorted.length * pxPerPoint);
+  document.getElementById('curveInner').style.width = width + 'px';
 
   if (curveChart) curveChart.destroy();
   curveChart = new Chart(document.getElementById('curveChart'), {
     type: 'line',
     data: {
       labels: sorted.map(c => c.days_before),
-      datasets: [{
-        label: 'Price', data: sorted.map(c => c.price),
-        borderColor: '#eb6834', backgroundColor: 'rgba(235,104,52,0.08)',
-        fill: true, pointRadius: 0, pointHoverRadius: 5,
-        borderWidth: 2, tension: 0.2
-      }]
+      datasets: [
+        { label: 'Price', data: prices, borderColor: '#eb6834', backgroundColor: 'rgba(235,104,52,0.06)', fill: true, pointRadius: 0, borderWidth: 1.5, tension: 0.15 },
+        { label: '7-pt trend', data: trend, borderColor: '#2a78d6', borderDash: [6, 4], fill: false, pointRadius: 0, borderWidth: 2, tension: 0.2 }
+      ]
     },
     options: {
       responsive: true, maintainAspectRatio: false,
+      onClick: (evt, els) => {
+        if (!els.length) return;
+        const daysBefore = sorted[els[0].index].days_before;
+        const filtered = currentOffers.filter(o => o.days_before === daysBefore);
+        renderOffers(filtered, `Offers collected at ${daysBefore} days out`);
+      },
+      onHover: (evt, els) => { evt.native.target.style.cursor = els.length ? 'pointer' : 'default'; },
       scales: {
         y: { ticks: { callback: v => '£' + v } },
-        x: {
-          reverse: true,
-          title: { display: true, text: 'days before departure' },
-          ticks: { maxTicksLimit: 10 }
-        }
+        x: { reverse: true, title: { display: true, text: 'days before departure' }, ticks: { maxRotation: 0 } }
       },
       plugins: {
         legend: { display: false },
-        tooltip: { callbacks: { label: ctx => '£' + ctx.parsed.y } }
+        tooltip: { callbacks: { label: ctx => ctx.dataset.label + ' £' + Math.round(ctx.parsed.y) } }
       }
     }
   });
 }
+
+document.getElementById('clearFilterBtn').addEventListener('click', () => {
+  renderOffers(currentOffers, 'All offers this month, cheapest first');
+});
 
 document.getElementById('backBtn').addEventListener('click', () => renderSeason(currentRoute));
 document.getElementById('loadBtn').addEventListener('click', () => document.getElementById('fileInput').click());
