@@ -639,9 +639,9 @@
               "stops": 0,
               "duration_mins": 85,
               "collected_date": "2026-08-12",
-              "score": 29,
+              "score": 28,
               "extra_hours": 0.2,
-              "calc": "\u00a327 ticket + 0.2h extra \u00d7 \u00a310/hr = \u00a329"
+              "calc": "\u00a327 ticket + 0.2h extra \u00d7 \u00a34/hr = \u00a328"
             },
             {
               "days_before": 19,
@@ -650,9 +650,9 @@
               "stops": 0,
               "duration_mins": 85,
               "collected_date": "2026-08-27",
-              "score": 34,
+              "score": 33,
               "extra_hours": 0.2,
-              "calc": "\u00a332 ticket + 0.2h extra \u00d7 \u00a310/hr = \u00a334"
+              "calc": "\u00a332 ticket + 0.2h extra \u00d7 \u00a34/hr = \u00a333"
             },
             {
               "days_before": 27,
@@ -661,14 +661,14 @@
               "stops": 0,
               "duration_mins": 85,
               "collected_date": "2026-08-19",
-              "score": 35,
+              "score": 34,
               "extra_hours": 0.2,
-              "calc": "\u00a333 ticket + 0.2h extra \u00d7 \u00a310/hr = \u00a335"
+              "calc": "\u00a333 ticket + 0.2h extra \u00d7 \u00a34/hr = \u00a334"
             }
           ],
-          "value_per_hour": 10,
-          "value_per_hour_method": "assumed",
-          "value_per_hour_n": 290
+          "value_per_hour": 4,
+          "value_per_hour_method": "calculated",
+          "value_per_hour_n": 36
         }
       },
       {
@@ -1298,7 +1298,7 @@
           ],
           "value_per_hour": 10,
           "value_per_hour_method": "assumed",
-          "value_per_hour_n": 290
+          "value_per_hour_n": 31
         }
       },
       {
@@ -1944,7 +1944,7 @@
           ],
           "value_per_hour": 10,
           "value_per_hour_method": "assumed",
-          "value_per_hour_n": 290
+          "value_per_hour_n": 33
         }
       },
       {
@@ -2542,7 +2542,7 @@
           ],
           "value_per_hour": 10,
           "value_per_hour_method": "assumed",
-          "value_per_hour_n": 290
+          "value_per_hour_n": 27
         }
       },
       {
@@ -3156,7 +3156,7 @@
           ],
           "value_per_hour": 10,
           "value_per_hour_method": "assumed",
-          "value_per_hour_n": 290
+          "value_per_hour_n": 29
         }
       },
       {
@@ -3810,7 +3810,7 @@
           ],
           "value_per_hour": 10,
           "value_per_hour_method": "assumed",
-          "value_per_hour_n": 290
+          "value_per_hour_n": 34
         }
       },
       {
@@ -4480,7 +4480,7 @@
           ],
           "value_per_hour": 10,
           "value_per_hour_method": "assumed",
-          "value_per_hour_n": 290
+          "value_per_hour_n": 36
         }
       },
       {
@@ -5078,7 +5078,7 @@
           ],
           "value_per_hour": 10,
           "value_per_hour_method": "assumed",
-          "value_per_hour_n": 290
+          "value_per_hour_n": 27
         }
       },
       {
@@ -5548,7 +5548,7 @@
           ],
           "value_per_hour": 10,
           "value_per_hour_method": "assumed",
-          "value_per_hour_n": 290
+          "value_per_hour_n": 14
         }
       },
       {
@@ -5950,7 +5950,7 @@
           ],
           "value_per_hour": 10,
           "value_per_hour_method": "assumed",
-          "value_per_hour_n": 290
+          "value_per_hour_n": 16
         }
       }
     ],
@@ -6494,7 +6494,7 @@
           ],
           "value_per_hour": 10,
           "value_per_hour_method": "assumed",
-          "value_per_hour_n": 206
+          "value_per_hour_n": 20
         }
       },
       {
@@ -7052,7 +7052,7 @@
           ],
           "value_per_hour": 10,
           "value_per_hour_method": "assumed",
-          "value_per_hour_n": 206
+          "value_per_hour_n": 22
         }
       },
       {
@@ -7610,7 +7610,7 @@
           ],
           "value_per_hour": 10,
           "value_per_hour_method": "assumed",
-          "value_per_hour_n": 206
+          "value_per_hour_n": 22
         }
       },
       {
@@ -8184,7 +8184,7 @@
           ],
           "value_per_hour": 10,
           "value_per_hour_method": "assumed",
-          "value_per_hour_n": 206
+          "value_per_hour_n": 24
         }
       },
       {
@@ -8718,7 +8718,7 @@
           ],
           "value_per_hour": 10,
           "value_per_hour_method": "assumed",
-          "value_per_hour_n": 206
+          "value_per_hour_n": 19
         }
       },
       {
@@ -9255,9 +9255,9 @@
               "stops": 0,
               "duration_mins": 150,
               "collected_date": "2026-08-12",
-              "score": 78,
+              "score": 76,
               "extra_hours": 0.2,
-              "calc": "\u00a376 ticket + 0.2h extra \u00d7 \u00a310/hr = \u00a378"
+              "calc": "\u00a376 ticket + 0.2h extra \u00d7 \u00a31/hr = \u00a376"
             },
             {
               "days_before": 187,
@@ -9268,7 +9268,7 @@
               "collected_date": "2026-08-12",
               "score": 81,
               "extra_hours": 0.0,
-              "calc": "\u00a381 ticket + 0.0h extra \u00d7 \u00a310/hr = \u00a381"
+              "calc": "\u00a381 ticket + 0.0h extra \u00d7 \u00a31/hr = \u00a381"
             },
             {
               "days_before": 180,
@@ -9277,14 +9277,14 @@
               "stops": 0,
               "duration_mins": 150,
               "collected_date": "2026-08-19",
-              "score": 83,
+              "score": 81,
               "extra_hours": 0.2,
-              "calc": "\u00a381 ticket + 0.2h extra \u00d7 \u00a310/hr = \u00a383"
+              "calc": "\u00a381 ticket + 0.2h extra \u00d7 \u00a31/hr = \u00a381"
             }
           ],
-          "value_per_hour": 10,
-          "value_per_hour_method": "assumed",
-          "value_per_hour_n": 206
+          "value_per_hour": 1,
+          "value_per_hour_method": "calculated",
+          "value_per_hour_n": 23
         }
       },
       {
@@ -9810,7 +9810,7 @@
           ],
           "value_per_hour": 10,
           "value_per_hour_method": "assumed",
-          "value_per_hour_n": 206
+          "value_per_hour_n": 18
         }
       },
       {
@@ -10320,7 +10320,7 @@
           ],
           "value_per_hour": 10,
           "value_per_hour_method": "assumed",
-          "value_per_hour_n": 206
+          "value_per_hour_n": 16
         }
       },
       {
@@ -10798,7 +10798,7 @@
           ],
           "value_per_hour": 10,
           "value_per_hour_method": "assumed",
-          "value_per_hour_n": 206
+          "value_per_hour_n": 18
         }
       },
       {
@@ -11144,7 +11144,7 @@
           ],
           "value_per_hour": 10,
           "value_per_hour_method": "assumed",
-          "value_per_hour_n": 206
+          "value_per_hour_n": 16
         }
       }
     ],
@@ -11725,42 +11725,42 @@
           },
           "recommended": [
             {
-              "days_before": 34,
-              "price": 340,
-              "airline": "Hainan",
+              "days_before": 27,
+              "price": 382,
+              "airline": "Etihad",
               "stops": 1,
-              "duration_mins": 1085,
+              "duration_mins": 925,
+              "collected_date": "2026-08-19",
+              "score": 475,
+              "extra_hours": 1.7,
+              "calc": "\u00a3382 ticket + 1.7h extra \u00d7 \u00a356/hr = \u00a3475"
+            },
+            {
+              "days_before": 34,
+              "price": 383,
+              "airline": "Etihad",
+              "stops": 1,
+              "duration_mins": 925,
               "collected_date": "2026-08-12",
-              "score": 388,
-              "extra_hours": 4.3,
-              "calc": "\u00a3340 ticket + 4.3h extra \u00d7 \u00a311/hr = \u00a3388"
+              "score": 476,
+              "extra_hours": 1.7,
+              "calc": "\u00a3383 ticket + 1.7h extra \u00d7 \u00a356/hr = \u00a3476"
             },
             {
               "days_before": 19,
-              "price": 341,
-              "airline": "Hainan",
+              "price": 457,
+              "airline": "Etihad",
               "stops": 1,
-              "duration_mins": 1085,
+              "duration_mins": 925,
               "collected_date": "2026-08-27",
-              "score": 389,
-              "extra_hours": 4.3,
-              "calc": "\u00a3341 ticket + 4.3h extra \u00d7 \u00a311/hr = \u00a3389"
-            },
-            {
-              "days_before": 27,
-              "price": 342,
-              "airline": "Hainan",
-              "stops": 1,
-              "duration_mins": 1085,
-              "collected_date": "2026-08-19",
-              "score": 390,
-              "extra_hours": 4.3,
-              "calc": "\u00a3342 ticket + 4.3h extra \u00d7 \u00a311/hr = \u00a3390"
+              "score": 550,
+              "extra_hours": 1.7,
+              "calc": "\u00a3457 ticket + 1.7h extra \u00d7 \u00a356/hr = \u00a3550"
             }
           ],
-          "value_per_hour": 11,
+          "value_per_hour": 56,
           "value_per_hour_method": "calculated",
-          "value_per_hour_n": 342
+          "value_per_hour_n": 29
         }
       },
       {
@@ -12385,9 +12385,9 @@
               "stops": 1,
               "duration_mins": 1070,
               "collected_date": "2026-08-12",
-              "score": 467,
+              "score": 540,
               "extra_hours": 4.1,
-              "calc": "\u00a3422 ticket + 4.1h extra \u00d7 \u00a311/hr = \u00a3467"
+              "calc": "\u00a3422 ticket + 4.1h extra \u00d7 \u00a329/hr = \u00a3540"
             },
             {
               "days_before": 64,
@@ -12396,25 +12396,25 @@
               "stops": 1,
               "duration_mins": 1050,
               "collected_date": "2026-08-12",
-              "score": 484,
+              "score": 552,
               "extra_hours": 3.8,
-              "calc": "\u00a3443 ticket + 3.8h extra \u00d7 \u00a311/hr = \u00a3484"
+              "calc": "\u00a3443 ticket + 3.8h extra \u00d7 \u00a329/hr = \u00a3552"
             },
             {
-              "days_before": 49,
-              "price": 410,
-              "airline": "Etihad",
+              "days_before": 57,
+              "price": 479,
+              "airline": "Qatar Airways",
               "stops": 1,
-              "duration_mins": 1250,
-              "collected_date": "2026-08-27",
-              "score": 488,
-              "extra_hours": 7.1,
-              "calc": "\u00a3410 ticket + 7.1h extra \u00d7 \u00a311/hr = \u00a3488"
+              "duration_mins": 1050,
+              "collected_date": "2026-08-19",
+              "score": 588,
+              "extra_hours": 3.8,
+              "calc": "\u00a3479 ticket + 3.8h extra \u00d7 \u00a329/hr = \u00a3588"
             }
           ],
-          "value_per_hour": 11,
+          "value_per_hour": 29,
           "value_per_hour_method": "calculated",
-          "value_per_hour_n": 342
+          "value_per_hour_n": 34
         }
       },
       {
@@ -13105,42 +13105,42 @@
           },
           "recommended": [
             {
-              "days_before": 95,
-              "price": 331,
-              "airline": "Hainan",
-              "stops": 1,
-              "duration_mins": 1205,
-              "collected_date": "2026-08-12",
-              "score": 407,
-              "extra_hours": 6.9,
-              "calc": "\u00a3331 ticket + 6.9h extra \u00d7 \u00a311/hr = \u00a3407"
-            },
-            {
-              "days_before": 88,
-              "price": 333,
-              "airline": "Hainan",
-              "stops": 1,
-              "duration_mins": 1205,
-              "collected_date": "2026-08-19",
-              "score": 409,
-              "extra_hours": 6.9,
-              "calc": "\u00a3333 ticket + 6.9h extra \u00d7 \u00a311/hr = \u00a3409"
-            },
-            {
               "days_before": 88,
               "price": 402,
               "airline": "Etihad",
               "stops": 1,
               "duration_mins": 895,
               "collected_date": "2026-08-19",
-              "score": 421,
+              "score": 440,
               "extra_hours": 1.8,
-              "calc": "\u00a3402 ticket + 1.8h extra \u00d7 \u00a311/hr = \u00a3421"
+              "calc": "\u00a3402 ticket + 1.8h extra \u00d7 \u00a322/hr = \u00a3440"
+            },
+            {
+              "days_before": 80,
+              "price": 408,
+              "airline": "Etihad",
+              "stops": 1,
+              "duration_mins": 905,
+              "collected_date": "2026-08-27",
+              "score": 450,
+              "extra_hours": 1.9,
+              "calc": "\u00a3408 ticket + 1.9h extra \u00d7 \u00a322/hr = \u00a3450"
+            },
+            {
+              "days_before": 88,
+              "price": 409,
+              "airline": "Etihad",
+              "stops": 1,
+              "duration_mins": 905,
+              "collected_date": "2026-08-19",
+              "score": 451,
+              "extra_hours": 1.9,
+              "calc": "\u00a3409 ticket + 1.9h extra \u00d7 \u00a322/hr = \u00a3451"
             }
           ],
-          "value_per_hour": 11,
+          "value_per_hour": 22,
           "value_per_hour_method": "calculated",
-          "value_per_hour_n": 342
+          "value_per_hour_n": 43
         }
       },
       {
@@ -13853,20 +13853,9 @@
               "stops": 1,
               "duration_mins": 960,
               "collected_date": "2026-08-27",
-              "score": 778,
+              "score": 806,
               "extra_hours": 2.8,
-              "calc": "\u00a3747 ticket + 2.8h extra \u00d7 \u00a311/hr = \u00a3778"
-            },
-            {
-              "days_before": 125,
-              "price": 695,
-              "airline": "Turkish Airlines",
-              "stops": 1,
-              "duration_mins": 1380,
-              "collected_date": "2026-08-12",
-              "score": 803,
-              "extra_hours": 9.8,
-              "calc": "\u00a3695 ticket + 9.8h extra \u00d7 \u00a311/hr = \u00a3803"
+              "calc": "\u00a3747 ticket + 2.8h extra \u00d7 \u00a321/hr = \u00a3806"
             },
             {
               "days_before": 118,
@@ -13875,14 +13864,25 @@
               "stops": 1,
               "duration_mins": 805,
               "collected_date": "2026-08-19",
-              "score": 827,
+              "score": 829,
               "extra_hours": 0.2,
-              "calc": "\u00a3824 ticket + 0.2h extra \u00d7 \u00a311/hr = \u00a3827"
+              "calc": "\u00a3824 ticket + 0.2h extra \u00d7 \u00a321/hr = \u00a3829"
+            },
+            {
+              "days_before": 110,
+              "price": 788,
+              "airline": "Saudia",
+              "stops": 1,
+              "duration_mins": 1015,
+              "collected_date": "2026-08-27",
+              "score": 867,
+              "extra_hours": 3.8,
+              "calc": "\u00a3788 ticket + 3.8h extra \u00d7 \u00a321/hr = \u00a3867"
             }
           ],
-          "value_per_hour": 11,
+          "value_per_hour": 21,
           "value_per_hour_method": "calculated",
-          "value_per_hour_n": 342
+          "value_per_hour_n": 45
         }
       },
       {
@@ -14547,9 +14547,9 @@
               "stops": 1,
               "duration_mins": 1205,
               "collected_date": "2026-08-12",
-              "score": 407,
+              "score": 421,
               "extra_hours": 6.9,
-              "calc": "\u00a3331 ticket + 6.9h extra \u00d7 \u00a311/hr = \u00a3407"
+              "calc": "\u00a3331 ticket + 6.9h extra \u00d7 \u00a313/hr = \u00a3421"
             },
             {
               "days_before": 149,
@@ -14558,9 +14558,9 @@
               "stops": 1,
               "duration_mins": 1205,
               "collected_date": "2026-08-19",
-              "score": 409,
+              "score": 423,
               "extra_hours": 6.9,
-              "calc": "\u00a3333 ticket + 6.9h extra \u00d7 \u00a311/hr = \u00a3409"
+              "calc": "\u00a3333 ticket + 6.9h extra \u00d7 \u00a313/hr = \u00a3423"
             },
             {
               "days_before": 141,
@@ -14569,14 +14569,14 @@
               "stops": 1,
               "duration_mins": 1075,
               "collected_date": "2026-08-27",
-              "score": 433,
+              "score": 443,
               "extra_hours": 4.8,
-              "calc": "\u00a3381 ticket + 4.8h extra \u00d7 \u00a311/hr = \u00a3433"
+              "calc": "\u00a3381 ticket + 4.8h extra \u00d7 \u00a313/hr = \u00a3443"
             }
           ],
-          "value_per_hour": 11,
+          "value_per_hour": 13,
           "value_per_hour_method": "calculated",
-          "value_per_hour_n": 342
+          "value_per_hour_n": 39
         }
       },
       {
@@ -15155,7 +15155,7 @@
               "collected_date": "2026-08-12",
               "score": 319,
               "extra_hours": 0.0,
-              "calc": "\u00a3319 ticket + 0.0h extra \u00d7 \u00a311/hr = \u00a3319"
+              "calc": "\u00a3319 ticket + 0.0h extra \u00d7 \u00a325/hr = \u00a3319"
             },
             {
               "days_before": 172,
@@ -15166,7 +15166,7 @@
               "collected_date": "2026-08-27",
               "score": 335,
               "extra_hours": 0.0,
-              "calc": "\u00a3335 ticket + 0.0h extra \u00d7 \u00a311/hr = \u00a3335"
+              "calc": "\u00a3335 ticket + 0.0h extra \u00d7 \u00a325/hr = \u00a3335"
             },
             {
               "days_before": 172,
@@ -15175,14 +15175,14 @@
               "stops": 1,
               "duration_mins": 895,
               "collected_date": "2026-08-27",
-              "score": 485,
+              "score": 528,
               "extra_hours": 3.1,
-              "calc": "\u00a3451 ticket + 3.1h extra \u00d7 \u00a311/hr = \u00a3485"
+              "calc": "\u00a3451 ticket + 3.1h extra \u00d7 \u00a325/hr = \u00a3528"
             }
           ],
-          "value_per_hour": 11,
-          "value_per_hour_method": "calculated",
-          "value_per_hour_n": 342
+          "value_per_hour": 25,
+          "value_per_hour_method": "assumed",
+          "value_per_hour_n": 28
         }
       },
       {
@@ -15769,7 +15769,7 @@
               "collected_date": "2026-08-27",
               "score": 303,
               "extra_hours": 0.0,
-              "calc": "\u00a3303 ticket + 0.0h extra \u00d7 \u00a311/hr = \u00a3303"
+              "calc": "\u00a3303 ticket + 0.0h extra \u00d7 \u00a37/hr = \u00a3303"
             },
             {
               "days_before": 208,
@@ -15780,7 +15780,7 @@
               "collected_date": "2026-08-19",
               "score": 304,
               "extra_hours": 0.0,
-              "calc": "\u00a3304 ticket + 0.0h extra \u00d7 \u00a311/hr = \u00a3304"
+              "calc": "\u00a3304 ticket + 0.0h extra \u00d7 \u00a37/hr = \u00a3304"
             },
             {
               "days_before": 215,
@@ -15791,12 +15791,12 @@
               "collected_date": "2026-08-12",
               "score": 319,
               "extra_hours": 0.0,
-              "calc": "\u00a3319 ticket + 0.0h extra \u00d7 \u00a311/hr = \u00a3319"
+              "calc": "\u00a3319 ticket + 0.0h extra \u00d7 \u00a37/hr = \u00a3319"
             }
           ],
-          "value_per_hour": 11,
+          "value_per_hour": 7,
           "value_per_hour_method": "calculated",
-          "value_per_hour_n": 342
+          "value_per_hour_n": 29
         }
       },
       {
@@ -16391,26 +16391,15 @@
           },
           "recommended": [
             {
-              "days_before": 231,
-              "price": 365,
-              "airline": "Singapore Airlines",
-              "stops": 1,
-              "duration_mins": 1105,
-              "collected_date": "2026-08-27",
-              "score": 416,
-              "extra_hours": 4.7,
-              "calc": "\u00a3365 ticket + 4.7h extra \u00d7 \u00a311/hr = \u00a3416"
-            },
-            {
               "days_before": 239,
               "price": 406,
               "airline": "Etihad",
               "stops": 1,
               "duration_mins": 940,
               "collected_date": "2026-08-19",
-              "score": 427,
+              "score": 465,
               "extra_hours": 1.9,
-              "calc": "\u00a3406 ticket + 1.9h extra \u00d7 \u00a311/hr = \u00a3427"
+              "calc": "\u00a3406 ticket + 1.9h extra \u00d7 \u00a331/hr = \u00a3465"
             },
             {
               "days_before": 246,
@@ -16419,14 +16408,25 @@
               "stops": 1,
               "duration_mins": 925,
               "collected_date": "2026-08-12",
-              "score": 442,
+              "score": 476,
               "extra_hours": 1.7,
-              "calc": "\u00a3424 ticket + 1.7h extra \u00d7 \u00a311/hr = \u00a3442"
+              "calc": "\u00a3424 ticket + 1.7h extra \u00d7 \u00a331/hr = \u00a3476"
+            },
+            {
+              "days_before": 246,
+              "price": 467,
+              "airline": "Lufthansa City Airlines",
+              "stops": 1,
+              "duration_mins": 845,
+              "collected_date": "2026-08-12",
+              "score": 477,
+              "extra_hours": 0.3,
+              "calc": "\u00a3467 ticket + 0.3h extra \u00d7 \u00a331/hr = \u00a3477"
             }
           ],
-          "value_per_hour": 11,
+          "value_per_hour": 31,
           "value_per_hour_method": "calculated",
-          "value_per_hour_n": 342
+          "value_per_hour_n": 35
         }
       },
       {
@@ -16895,9 +16895,9 @@
               "stops": 1,
               "duration_mins": 1105,
               "collected_date": "2026-08-27",
-              "score": 433,
+              "score": 424,
               "extra_hours": 4.7,
-              "calc": "\u00a3382 ticket + 4.7h extra \u00d7 \u00a311/hr = \u00a3433"
+              "calc": "\u00a3382 ticket + 4.7h extra \u00d7 \u00a39/hr = \u00a3424"
             },
             {
               "days_before": 269,
@@ -16906,25 +16906,25 @@
               "stops": 1,
               "duration_mins": 1030,
               "collected_date": "2026-08-19",
-              "score": 446,
+              "score": 439,
               "extra_hours": 3.4,
-              "calc": "\u00a3408 ticket + 3.4h extra \u00d7 \u00a311/hr = \u00a3446"
+              "calc": "\u00a3408 ticket + 3.4h extra \u00d7 \u00a39/hr = \u00a3439"
             },
             {
               "days_before": 269,
-              "price": 475,
-              "airline": "SWISS",
+              "price": 459,
+              "airline": "Qatar Airways",
               "stops": 1,
-              "duration_mins": 830,
+              "duration_mins": 925,
               "collected_date": "2026-08-19",
-              "score": 476,
-              "extra_hours": 0.1,
-              "calc": "\u00a3475 ticket + 0.1h extra \u00d7 \u00a311/hr = \u00a3476"
+              "score": 474,
+              "extra_hours": 1.7,
+              "calc": "\u00a3459 ticket + 1.7h extra \u00d7 \u00a39/hr = \u00a3474"
             }
           ],
-          "value_per_hour": 11,
+          "value_per_hour": 9,
           "value_per_hour_method": "calculated",
-          "value_per_hour_n": 342
+          "value_per_hour_n": 22
         }
       },
       {
@@ -17321,9 +17321,20 @@
               "stops": 1,
               "duration_mins": 940,
               "collected_date": "2026-08-27",
-              "score": 435,
+              "score": 479,
               "extra_hours": 1.9,
-              "calc": "\u00a3414 ticket + 1.9h extra \u00d7 \u00a311/hr = \u00a3435"
+              "calc": "\u00a3414 ticket + 1.9h extra \u00d7 \u00a334/hr = \u00a3479"
+            },
+            {
+              "days_before": 300,
+              "price": 476,
+              "airline": "Lufthansa City Airlines",
+              "stops": 1,
+              "duration_mins": 845,
+              "collected_date": "2026-08-19",
+              "score": 487,
+              "extra_hours": 0.3,
+              "calc": "\u00a3476 ticket + 0.3h extra \u00d7 \u00a334/hr = \u00a3487"
             },
             {
               "days_before": 300,
@@ -17332,25 +17343,14 @@
               "stops": 1,
               "duration_mins": 925,
               "collected_date": "2026-08-19",
-              "score": 451,
+              "score": 490,
               "extra_hours": 1.7,
-              "calc": "\u00a3433 ticket + 1.7h extra \u00d7 \u00a311/hr = \u00a3451"
-            },
-            {
-              "days_before": 300,
-              "price": 433,
-              "airline": "Qatar Airways",
-              "stops": 1,
-              "duration_mins": 990,
-              "collected_date": "2026-08-19",
-              "score": 463,
-              "extra_hours": 2.8,
-              "calc": "\u00a3433 ticket + 2.8h extra \u00d7 \u00a311/hr = \u00a3463"
+              "calc": "\u00a3433 ticket + 1.7h extra \u00d7 \u00a334/hr = \u00a3490"
             }
           ],
-          "value_per_hour": 11,
+          "value_per_hour": 34,
           "value_per_hour_method": "calculated",
-          "value_per_hour_n": 342
+          "value_per_hour_n": 25
         }
       },
       {
@@ -17531,9 +17531,9 @@
               "stops": 2,
               "duration_mins": 1160,
               "collected_date": "2026-08-27",
-              "score": 580,
+              "score": 625,
               "extra_hours": 5.6,
-              "calc": "\u00a3519 ticket + 5.6h extra \u00d7 \u00a311/hr = \u00a3580"
+              "calc": "\u00a3519 ticket + 5.6h extra \u00d7 \u00a319/hr = \u00a3625"
             },
             {
               "days_before": 322,
@@ -17542,9 +17542,9 @@
               "stops": 1,
               "duration_mins": 1030,
               "collected_date": "2026-08-27",
-              "score": 638,
+              "score": 665,
               "extra_hours": 3.4,
-              "calc": "\u00a3600 ticket + 3.4h extra \u00d7 \u00a311/hr = \u00a3638"
+              "calc": "\u00a3600 ticket + 3.4h extra \u00d7 \u00a319/hr = \u00a3665"
             },
             {
               "days_before": 322,
@@ -17553,14 +17553,14 @@
               "stops": 1,
               "duration_mins": 875,
               "collected_date": "2026-08-27",
-              "score": 674,
+              "score": 681,
               "extra_hours": 0.8,
-              "calc": "\u00a3665 ticket + 0.8h extra \u00d7 \u00a311/hr = \u00a3674"
+              "calc": "\u00a3665 ticket + 0.8h extra \u00d7 \u00a319/hr = \u00a3681"
             }
           ],
-          "value_per_hour": 11,
+          "value_per_hour": 19,
           "value_per_hour_method": "calculated",
-          "value_per_hour_n": 342
+          "value_per_hour_n": 13
         }
       }
     ],
@@ -18225,26 +18225,15 @@
           },
           "recommended": [
             {
-              "days_before": 19,
-              "price": 458,
-              "airline": "Qatar Airways",
-              "stops": 1,
-              "duration_mins": 1435,
-              "collected_date": "2026-08-27",
-              "score": 482,
-              "extra_hours": 3.0,
-              "calc": "\u00a3458 ticket + 3.0h extra \u00d7 \u00a38/hr = \u00a3482"
-            },
-            {
               "days_before": 27,
               "price": 461,
               "airline": "Etihad",
               "stops": 1,
               "duration_mins": 1415,
               "collected_date": "2026-08-19",
-              "score": 482,
+              "score": 506,
               "extra_hours": 2.7,
-              "calc": "\u00a3461 ticket + 2.7h extra \u00d7 \u00a38/hr = \u00a3482"
+              "calc": "\u00a3461 ticket + 2.7h extra \u00d7 \u00a317/hr = \u00a3506"
             },
             {
               "days_before": 34,
@@ -18253,14 +18242,25 @@
               "stops": 1,
               "duration_mins": 1415,
               "collected_date": "2026-08-12",
-              "score": 483,
+              "score": 507,
               "extra_hours": 2.7,
-              "calc": "\u00a3462 ticket + 2.7h extra \u00d7 \u00a38/hr = \u00a3483"
+              "calc": "\u00a3462 ticket + 2.7h extra \u00d7 \u00a317/hr = \u00a3507"
+            },
+            {
+              "days_before": 19,
+              "price": 458,
+              "airline": "Qatar Airways",
+              "stops": 1,
+              "duration_mins": 1435,
+              "collected_date": "2026-08-27",
+              "score": 509,
+              "extra_hours": 3.0,
+              "calc": "\u00a3458 ticket + 3.0h extra \u00d7 \u00a317/hr = \u00a3509"
             }
           ],
-          "value_per_hour": 8,
+          "value_per_hour": 17,
           "value_per_hour_method": "calculated",
-          "value_per_hour_n": 379
+          "value_per_hour_n": 39
         }
       },
       {
@@ -18857,9 +18857,9 @@
               "stops": 1,
               "duration_mins": 1435,
               "collected_date": "2026-08-27",
-              "score": 493,
+              "score": 572,
               "extra_hours": 5.2,
-              "calc": "\u00a3451 ticket + 5.2h extra \u00d7 \u00a38/hr = \u00a3493"
+              "calc": "\u00a3451 ticket + 5.2h extra \u00d7 \u00a323/hr = \u00a3572"
             },
             {
               "days_before": 57,
@@ -18868,25 +18868,25 @@
               "stops": 1,
               "duration_mins": 1435,
               "collected_date": "2026-08-19",
-              "score": 494,
+              "score": 573,
               "extra_hours": 5.2,
-              "calc": "\u00a3452 ticket + 5.2h extra \u00d7 \u00a38/hr = \u00a3494"
+              "calc": "\u00a3452 ticket + 5.2h extra \u00d7 \u00a323/hr = \u00a3573"
             },
             {
-              "days_before": 64,
-              "price": 453,
-              "airline": "Qatar Airways",
+              "days_before": 49,
+              "price": 460,
+              "airline": "Etihad",
               "stops": 1,
-              "duration_mins": 1435,
-              "collected_date": "2026-08-12",
-              "score": 495,
-              "extra_hours": 5.2,
-              "calc": "\u00a3453 ticket + 5.2h extra \u00d7 \u00a38/hr = \u00a3495"
+              "duration_mins": 1415,
+              "collected_date": "2026-08-27",
+              "score": 573,
+              "extra_hours": 4.9,
+              "calc": "\u00a3460 ticket + 4.9h extra \u00d7 \u00a323/hr = \u00a3573"
             }
           ],
-          "value_per_hour": 8,
+          "value_per_hour": 23,
           "value_per_hour_method": "calculated",
-          "value_per_hour_n": 379
+          "value_per_hour_n": 30
         }
       },
       {
@@ -19542,17 +19542,6 @@
           "recommended": [
             {
               "days_before": 80,
-              "price": 435,
-              "airline": "Etihad",
-              "stops": 1,
-              "duration_mins": 1535,
-              "collected_date": "2026-08-27",
-              "score": 494,
-              "extra_hours": 7.3,
-              "calc": "\u00a3435 ticket + 7.3h extra \u00d7 \u00a38/hr = \u00a3494"
-            },
-            {
-              "days_before": 80,
               "price": 509,
               "airline": "Singapore Airlines",
               "stops": 0,
@@ -19560,7 +19549,18 @@
               "collected_date": "2026-08-27",
               "score": 509,
               "extra_hours": 0.0,
-              "calc": "\u00a3509 ticket + 0.0h extra \u00d7 \u00a38/hr = \u00a3509"
+              "calc": "\u00a3509 ticket + 0.0h extra \u00d7 \u00a322/hr = \u00a3509"
+            },
+            {
+              "days_before": 80,
+              "price": 435,
+              "airline": "Etihad",
+              "stops": 1,
+              "duration_mins": 1535,
+              "collected_date": "2026-08-27",
+              "score": 596,
+              "extra_hours": 7.3,
+              "calc": "\u00a3435 ticket + 7.3h extra \u00d7 \u00a322/hr = \u00a3596"
             },
             {
               "days_before": 80,
@@ -19569,14 +19569,14 @@
               "stops": 1,
               "duration_mins": 1485,
               "collected_date": "2026-08-27",
-              "score": 510,
+              "score": 601,
               "extra_hours": 6.5,
-              "calc": "\u00a3458 ticket + 6.5h extra \u00d7 \u00a38/hr = \u00a3510"
+              "calc": "\u00a3458 ticket + 6.5h extra \u00d7 \u00a322/hr = \u00a3601"
             }
           ],
-          "value_per_hour": 8,
+          "value_per_hour": 22,
           "value_per_hour_method": "calculated",
-          "value_per_hour_n": 379
+          "value_per_hour_n": 38
         }
       },
       {
@@ -20189,9 +20189,9 @@
               "stops": 1,
               "duration_mins": 1535,
               "collected_date": "2026-08-27",
-              "score": 494,
+              "score": 589,
               "extra_hours": 7.3,
-              "calc": "\u00a3435 ticket + 7.3h extra \u00d7 \u00a38/hr = \u00a3494"
+              "calc": "\u00a3435 ticket + 7.3h extra \u00d7 \u00a321/hr = \u00a3589"
             },
             {
               "days_before": 125,
@@ -20200,25 +20200,25 @@
               "stops": 1,
               "duration_mins": 1485,
               "collected_date": "2026-08-12",
-              "score": 513,
+              "score": 598,
               "extra_hours": 6.5,
-              "calc": "\u00a3461 ticket + 6.5h extra \u00d7 \u00a38/hr = \u00a3513"
+              "calc": "\u00a3461 ticket + 6.5h extra \u00d7 \u00a321/hr = \u00a3598"
             },
             {
-              "days_before": 110,
-              "price": 472,
-              "airline": "Gulf Air",
+              "days_before": 125,
+              "price": 571,
+              "airline": "EVA Air",
               "stops": 1,
-              "duration_mins": 1560,
-              "collected_date": "2026-08-27",
-              "score": 534,
-              "extra_hours": 7.8,
-              "calc": "\u00a3472 ticket + 7.8h extra \u00d7 \u00a38/hr = \u00a3534"
+              "duration_mins": 1250,
+              "collected_date": "2026-08-12",
+              "score": 625,
+              "extra_hours": 2.6,
+              "calc": "\u00a3571 ticket + 2.6h extra \u00d7 \u00a321/hr = \u00a3625"
             }
           ],
-          "value_per_hour": 8,
+          "value_per_hour": 21,
           "value_per_hour_method": "calculated",
-          "value_per_hour_n": 379
+          "value_per_hour_n": 32
         }
       },
       {
@@ -20849,7 +20849,7 @@
               "collected_date": "2026-08-27",
               "score": 572,
               "extra_hours": 0.2,
-              "calc": "\u00a3571 ticket + 0.2h extra \u00d7 \u00a38/hr = \u00a3572"
+              "calc": "\u00a3571 ticket + 0.2h extra \u00d7 \u00a37/hr = \u00a3572"
             },
             {
               "days_before": 156,
@@ -20858,9 +20858,9 @@
               "stops": 1,
               "duration_mins": 1285,
               "collected_date": "2026-08-12",
-              "score": 574,
+              "score": 573,
               "extra_hours": 0.8,
-              "calc": "\u00a3568 ticket + 0.8h extra \u00d7 \u00a38/hr = \u00a3574"
+              "calc": "\u00a3568 ticket + 0.8h extra \u00d7 \u00a37/hr = \u00a3573"
             },
             {
               "days_before": 149,
@@ -20869,14 +20869,14 @@
               "stops": 2,
               "duration_mins": 1765,
               "collected_date": "2026-08-19",
-              "score": 625,
+              "score": 616,
               "extra_hours": 8.8,
-              "calc": "\u00a3555 ticket + 8.8h extra \u00d7 \u00a38/hr = \u00a3625"
+              "calc": "\u00a3555 ticket + 8.8h extra \u00d7 \u00a37/hr = \u00a3616"
             }
           ],
-          "value_per_hour": 8,
+          "value_per_hour": 7,
           "value_per_hour_method": "calculated",
-          "value_per_hour_n": 379
+          "value_per_hour_n": 34
         }
       },
       {
@@ -21665,9 +21665,9 @@
               "stops": 1,
               "duration_mins": 1485,
               "collected_date": "2026-08-27",
-              "score": 491,
+              "score": 482,
               "extra_hours": 4.1,
-              "calc": "\u00a3458 ticket + 4.1h extra \u00d7 \u00a38/hr = \u00a3491"
+              "calc": "\u00a3458 ticket + 4.1h extra \u00d7 \u00a36/hr = \u00a3482"
             },
             {
               "days_before": 172,
@@ -21676,25 +21676,25 @@
               "stops": 1,
               "duration_mins": 1495,
               "collected_date": "2026-08-27",
-              "score": 492,
+              "score": 484,
               "extra_hours": 4.2,
-              "calc": "\u00a3458 ticket + 4.2h extra \u00d7 \u00a38/hr = \u00a3492"
+              "calc": "\u00a3458 ticket + 4.2h extra \u00d7 \u00a36/hr = \u00a3484"
             },
             {
-              "days_before": 187,
-              "price": 460,
+              "days_before": 172,
+              "price": 458,
               "airline": "Qatar Airways",
               "stops": 1,
-              "duration_mins": 1485,
-              "collected_date": "2026-08-12",
-              "score": 493,
-              "extra_hours": 4.1,
-              "calc": "\u00a3460 ticket + 4.1h extra \u00d7 \u00a38/hr = \u00a3493"
+              "duration_mins": 1505,
+              "collected_date": "2026-08-27",
+              "score": 484,
+              "extra_hours": 4.4,
+              "calc": "\u00a3458 ticket + 4.4h extra \u00d7 \u00a36/hr = \u00a3484"
             }
           ],
-          "value_per_hour": 8,
+          "value_per_hour": 6,
           "value_per_hour_method": "calculated",
-          "value_per_hour_n": 379
+          "value_per_hour_n": 54
         }
       },
       {
@@ -22435,9 +22435,9 @@
               "stops": 1,
               "duration_mins": 1455,
               "collected_date": "2026-08-27",
-              "score": 506,
+              "score": 512,
               "extra_hours": 6.0,
-              "calc": "\u00a3458 ticket + 6.0h extra \u00d7 \u00a38/hr = \u00a3506"
+              "calc": "\u00a3458 ticket + 6.0h extra \u00d7 \u00a39/hr = \u00a3512"
             },
             {
               "days_before": 200,
@@ -22446,9 +22446,9 @@
               "stops": 1,
               "duration_mins": 1460,
               "collected_date": "2026-08-27",
-              "score": 507,
+              "score": 513,
               "extra_hours": 6.1,
-              "calc": "\u00a3458 ticket + 6.1h extra \u00d7 \u00a38/hr = \u00a3507"
+              "calc": "\u00a3458 ticket + 6.1h extra \u00d7 \u00a39/hr = \u00a3513"
             },
             {
               "days_before": 215,
@@ -22457,14 +22457,14 @@
               "stops": 1,
               "duration_mins": 1455,
               "collected_date": "2026-08-12",
-              "score": 508,
+              "score": 514,
               "extra_hours": 6.0,
-              "calc": "\u00a3460 ticket + 6.0h extra \u00d7 \u00a38/hr = \u00a3508"
+              "calc": "\u00a3460 ticket + 6.0h extra \u00d7 \u00a39/hr = \u00a3514"
             }
           ],
-          "value_per_hour": 8,
+          "value_per_hour": 9,
           "value_per_hour_method": "calculated",
-          "value_per_hour_n": 379
+          "value_per_hour_n": 48
         }
       },
       {
@@ -23173,9 +23173,9 @@
               "stops": 1,
               "duration_mins": 1435,
               "collected_date": "2026-08-27",
-              "score": 486,
+              "score": 515,
               "extra_hours": 3.2,
-              "calc": "\u00a3461 ticket + 3.2h extra \u00d7 \u00a38/hr = \u00a3486"
+              "calc": "\u00a3461 ticket + 3.2h extra \u00d7 \u00a317/hr = \u00a3515"
             },
             {
               "days_before": 246,
@@ -23184,9 +23184,9 @@
               "stops": 1,
               "duration_mins": 1435,
               "collected_date": "2026-08-12",
-              "score": 488,
+              "score": 517,
               "extra_hours": 3.2,
-              "calc": "\u00a3463 ticket + 3.2h extra \u00d7 \u00a38/hr = \u00a3488"
+              "calc": "\u00a3463 ticket + 3.2h extra \u00d7 \u00a317/hr = \u00a3517"
             },
             {
               "days_before": 231,
@@ -23195,14 +23195,14 @@
               "stops": 1,
               "duration_mins": 1510,
               "collected_date": "2026-08-27",
-              "score": 496,
+              "score": 536,
               "extra_hours": 4.4,
-              "calc": "\u00a3461 ticket + 4.4h extra \u00d7 \u00a38/hr = \u00a3496"
+              "calc": "\u00a3461 ticket + 4.4h extra \u00d7 \u00a317/hr = \u00a3536"
             }
           ],
-          "value_per_hour": 8,
+          "value_per_hour": 17,
           "value_per_hour_method": "calculated",
-          "value_per_hour_n": 379
+          "value_per_hour_n": 44
         }
       },
       {
@@ -23699,9 +23699,9 @@
               "stops": 1,
               "duration_mins": 1535,
               "collected_date": "2026-08-19",
-              "score": 573,
+              "score": 580,
               "extra_hours": 6.9,
-              "calc": "\u00a3518 ticket + 6.9h extra \u00d7 \u00a38/hr = \u00a3573"
+              "calc": "\u00a3518 ticket + 6.9h extra \u00d7 \u00a39/hr = \u00a3580"
             },
             {
               "days_before": 261,
@@ -23710,9 +23710,9 @@
               "stops": 1,
               "duration_mins": 1510,
               "collected_date": "2026-08-27",
-              "score": 578,
+              "score": 584,
               "extra_hours": 6.5,
-              "calc": "\u00a3526 ticket + 6.5h extra \u00d7 \u00a38/hr = \u00a3578"
+              "calc": "\u00a3526 ticket + 6.5h extra \u00d7 \u00a39/hr = \u00a3584"
             },
             {
               "days_before": 269,
@@ -23721,14 +23721,14 @@
               "stops": 1,
               "duration_mins": 1510,
               "collected_date": "2026-08-19",
-              "score": 579,
+              "score": 586,
               "extra_hours": 6.5,
-              "calc": "\u00a3527 ticket + 6.5h extra \u00d7 \u00a38/hr = \u00a3579"
+              "calc": "\u00a3527 ticket + 6.5h extra \u00d7 \u00a39/hr = \u00a3586"
             }
           ],
-          "value_per_hour": 8,
+          "value_per_hour": 9,
           "value_per_hour_method": "calculated",
-          "value_per_hour_n": 379
+          "value_per_hour_n": 21
         }
       },
       {
@@ -24291,7 +24291,7 @@
               "collected_date": "2026-08-27",
               "score": 539,
               "extra_hours": 0.0,
-              "calc": "\u00a3539 ticket + 0.0h extra \u00d7 \u00a38/hr = \u00a3539"
+              "calc": "\u00a3539 ticket + 0.0h extra \u00d7 \u00a39/hr = \u00a3539"
             },
             {
               "days_before": 300,
@@ -24300,9 +24300,9 @@
               "stops": 1,
               "duration_mins": 1535,
               "collected_date": "2026-08-19",
-              "score": 573,
+              "score": 580,
               "extra_hours": 6.9,
-              "calc": "\u00a3518 ticket + 6.9h extra \u00d7 \u00a38/hr = \u00a3573"
+              "calc": "\u00a3518 ticket + 6.9h extra \u00d7 \u00a39/hr = \u00a3580"
             },
             {
               "days_before": 300,
@@ -24311,14 +24311,14 @@
               "stops": 1,
               "duration_mins": 1525,
               "collected_date": "2026-08-19",
-              "score": 574,
+              "score": 581,
               "extra_hours": 6.8,
-              "calc": "\u00a3520 ticket + 6.8h extra \u00d7 \u00a38/hr = \u00a3574"
+              "calc": "\u00a3520 ticket + 6.8h extra \u00d7 \u00a39/hr = \u00a3581"
             }
           ],
-          "value_per_hour": 8,
+          "value_per_hour": 9,
           "value_per_hour_method": "calculated",
-          "value_per_hour_n": 379
+          "value_per_hour_n": 29
         }
       }
     ],
@@ -25130,7 +25130,7 @@
           ],
           "value_per_hour": 10,
           "value_per_hour_method": "assumed",
-          "value_per_hour_n": 449
+          "value_per_hour_n": 53
         }
       },
       {
@@ -25887,36 +25887,36 @@
               "stops": 0,
               "duration_mins": 65,
               "collected_date": "2026-08-12",
-              "score": 52,
+              "score": 53,
               "extra_hours": 0.1,
-              "calc": "\u00a351 ticket + 0.1h extra \u00d7 \u00a310/hr = \u00a352"
+              "calc": "\u00a351 ticket + 0.1h extra \u00d7 \u00a324/hr = \u00a353"
             },
             {
-              "days_before": 64,
-              "price": 50,
-              "airline": "Scoot",
+              "days_before": 49,
+              "price": 53,
+              "airline": "Batik Air",
               "stops": 0,
-              "duration_mins": 75,
-              "collected_date": "2026-08-12",
-              "score": 52,
-              "extra_hours": 0.2,
-              "calc": "\u00a350 ticket + 0.2h extra \u00d7 \u00a310/hr = \u00a352"
+              "duration_mins": 60,
+              "collected_date": "2026-08-27",
+              "score": 53,
+              "extra_hours": 0.0,
+              "calc": "\u00a353 ticket + 0.0h extra \u00d7 \u00a324/hr = \u00a353"
             },
             {
-              "days_before": 64,
-              "price": 51,
+              "days_before": 57,
+              "price": 52,
               "airline": "AirAsia",
               "stops": 0,
-              "duration_mins": 70,
-              "collected_date": "2026-08-12",
-              "score": 53,
-              "extra_hours": 0.2,
-              "calc": "\u00a351 ticket + 0.2h extra \u00d7 \u00a310/hr = \u00a353"
+              "duration_mins": 65,
+              "collected_date": "2026-08-19",
+              "score": 54,
+              "extra_hours": 0.1,
+              "calc": "\u00a352 ticket + 0.1h extra \u00d7 \u00a324/hr = \u00a354"
             }
           ],
-          "value_per_hour": 10,
-          "value_per_hour_method": "assumed",
-          "value_per_hour_n": 449
+          "value_per_hour": 24,
+          "value_per_hour_method": "calculated",
+          "value_per_hour_n": 50
         }
       },
       {
@@ -26682,7 +26682,7 @@
           ],
           "value_per_hour": 10,
           "value_per_hour_method": "assumed",
-          "value_per_hour_n": 449
+          "value_per_hour_n": 48
         }
       },
       {
@@ -27444,7 +27444,7 @@
           ],
           "value_per_hour": 10,
           "value_per_hour_method": "assumed",
-          "value_per_hour_n": 449
+          "value_per_hour_n": 47
         }
       },
       {
@@ -28193,9 +28193,9 @@
               "stops": 0,
               "duration_mins": 75,
               "collected_date": "2026-08-12",
-              "score": 52,
+              "score": 63,
               "extra_hours": 0.2,
-              "calc": "\u00a350 ticket + 0.2h extra \u00d7 \u00a310/hr = \u00a352"
+              "calc": "\u00a350 ticket + 0.2h extra \u00d7 \u00a351/hr = \u00a363"
             },
             {
               "days_before": 156,
@@ -28204,25 +28204,25 @@
               "stops": 0,
               "duration_mins": 75,
               "collected_date": "2026-08-12",
-              "score": 58,
+              "score": 69,
               "extra_hours": 0.2,
-              "calc": "\u00a356 ticket + 0.2h extra \u00d7 \u00a310/hr = \u00a358"
+              "calc": "\u00a356 ticket + 0.2h extra \u00d7 \u00a351/hr = \u00a369"
             },
             {
               "days_before": 156,
-              "price": 56,
-              "airline": "Scoot",
+              "price": 66,
+              "airline": "AirAsia",
               "stops": 0,
-              "duration_mins": 80,
+              "duration_mins": 65,
               "collected_date": "2026-08-12",
-              "score": 59,
-              "extra_hours": 0.3,
-              "calc": "\u00a356 ticket + 0.3h extra \u00d7 \u00a310/hr = \u00a359"
+              "score": 70,
+              "extra_hours": 0.1,
+              "calc": "\u00a366 ticket + 0.1h extra \u00d7 \u00a351/hr = \u00a370"
             }
           ],
-          "value_per_hour": 10,
-          "value_per_hour_method": "assumed",
-          "value_per_hour_n": 449
+          "value_per_hour": 51,
+          "value_per_hour_method": "calculated",
+          "value_per_hour_n": 49
         }
       },
       {
@@ -28968,7 +28968,7 @@
           ],
           "value_per_hour": 10,
           "value_per_hour_method": "assumed",
-          "value_per_hour_n": 449
+          "value_per_hour_n": 45
         }
       },
       {
@@ -29674,7 +29674,7 @@
           ],
           "value_per_hour": 10,
           "value_per_hour_method": "assumed",
-          "value_per_hour_n": 449
+          "value_per_hour_n": 40
         }
       },
       {
@@ -30428,7 +30428,7 @@
           ],
           "value_per_hour": 10,
           "value_per_hour_method": "assumed",
-          "value_per_hour_n": 449
+          "value_per_hour_n": 46
         }
       },
       {
@@ -31002,7 +31002,7 @@
           ],
           "value_per_hour": 10,
           "value_per_hour_method": "assumed",
-          "value_per_hour_n": 449
+          "value_per_hour_n": 27
         }
       },
       {
@@ -31542,14 +31542,25 @@
           "recommended": [
             {
               "days_before": 300,
+              "price": 77,
+              "airline": "AirAsia",
+              "stops": 0,
+              "duration_mins": 65,
+              "collected_date": "2026-08-19",
+              "score": 77,
+              "extra_hours": 0.0,
+              "calc": "\u00a377 ticket + 0.0h extra \u00d7 \u00a3104/hr = \u00a377"
+            },
+            {
+              "days_before": 300,
               "price": 64,
               "airline": "Scoot",
               "stops": 0,
               "duration_mins": 75,
               "collected_date": "2026-08-19",
-              "score": 66,
+              "score": 81,
               "extra_hours": 0.2,
-              "calc": "\u00a364 ticket + 0.2h extra \u00d7 \u00a310/hr = \u00a366"
+              "calc": "\u00a364 ticket + 0.2h extra \u00d7 \u00a3104/hr = \u00a381"
             },
             {
               "days_before": 292,
@@ -31558,25 +31569,14 @@
               "stops": 0,
               "duration_mins": 75,
               "collected_date": "2026-08-27",
-              "score": 67,
+              "score": 82,
               "extra_hours": 0.2,
-              "calc": "\u00a365 ticket + 0.2h extra \u00d7 \u00a310/hr = \u00a367"
-            },
-            {
-              "days_before": 300,
-              "price": 64,
-              "airline": "Scoot",
-              "stops": 0,
-              "duration_mins": 85,
-              "collected_date": "2026-08-19",
-              "score": 67,
-              "extra_hours": 0.3,
-              "calc": "\u00a364 ticket + 0.3h extra \u00d7 \u00a310/hr = \u00a367"
+              "calc": "\u00a365 ticket + 0.2h extra \u00d7 \u00a3104/hr = \u00a382"
             }
           ],
-          "value_per_hour": 10,
-          "value_per_hour_method": "assumed",
-          "value_per_hour_n": 449
+          "value_per_hour": 104,
+          "value_per_hour_method": "calculated",
+          "value_per_hour_n": 27
         }
       },
       {
@@ -31918,7 +31918,7 @@
           ],
           "value_per_hour": 10,
           "value_per_hour_method": "assumed",
-          "value_per_hour_n": 449
+          "value_per_hour_n": 17
         }
       }
     ]

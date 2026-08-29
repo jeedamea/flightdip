@@ -1,106 +1,121 @@
 # FlightDip
 
-Building my own dataset to answer a question I couldn't find a real answer to:
-**given that you have to fly at a particular time of year, when should you
-actually buy the ticket?**
+## Why this exists
 
-Everyone repeats the same advice — book six weeks out, book on a Tuesday,
-prices spike at the weekend. Very little of it is backed by anything you can
-check. So I'm collecting the data.
+I graduated a few months ago. Since then it's been the usual grind: applications, assessments, interviews. But I wanted to actually build something too, not just prep for interviews about stuff I hadn't done yet.
 
----
+I fly between Manchester and Bangkok fairly often, and along the way I'd picked up all the usual flight price advice everyone repeats. Book six weeks out. Prices spike at weekends. Tuesdays are cheaper. I'd never actually checked any of it, so I decided to.
 
-## The design
+The real question isn't "when is flying cheap." December is obviously more expensive than April, that's not a finding, that's just the calendar. The actual question only makes sense once you accept you're locked into a season:
 
-Five routes, tracking departures on the **15th of every month for the next
-twelve months** — 60 flights in total, sampled four times a month.
+**Given I have to fly at a specific time of year, when's the right moment to buy, and what should I actually book once I do?**
 
-| Route | Why it's in |
-|---|---|
-| MAN → BKK | long haul |
-| MAN → AMS | short haul |
-| MAN → BCN | medium haul |
-| SIN → JFK | longest scheduled flight in the world |
-| SIN → KUL | shortest real international route |
-
-Fixed monthly dates give two variables from one dataset. **Across** the twelve
-dates: seasonality. **Within** each date, as departure approaches: lead time.
-Because the dates are a month apart, a single collection day samples every
-lead-time bucket at once — 34 days out on one flight, 65 on the next, 95 on the
-next, all the way to a year.
-
-The answer I'm after lives in the interaction. A £700 December fare might be a
-better *buy* than a £400 April fare, if £700 is December's floor and £400 isn't
-April's. You can't see that by measuring either axis alone.
-
-**Every design choice, with its reasoning and its trade-off, is written up in
-[DECISIONS.md](DECISIONS.md).**
+FlightDip is what came out of trying to answer that properly, with real data instead of guessing.
 
 ---
 
-## Status
+## What it does
 
-Collecting. Sweeps run automatically on the 5th, 12th, 19th and 27th of each
-month via GitHub Actions. Analysis begins once there's enough coverage across
-lead-time buckets.
+Five routes, tracked on the 15th of every month for the next year, swept automatically four times a month via GitHub Actions. Every sweep pulls both Google's backfilled price history and live flight offers (airline, duration, stops) for each tracked date.
 
----
+That data feeds a self-contained dashboard:
 
-## How it works
+- **Seasonality view.** Average, lowest and highest price per month, with the observed range, for whichever route you pick.
+- **Click a month** and you get the buy-timing curve: price against days before departure, with a smoothed trend line so a single weird day doesn't get mistaken for a real pattern.
+- **Recommendations.** Not just cheapest. A value-of-time score balances price against duration, calculated from that month's own offers (see `DECISIONS.md` #12 for why it has to be scoped that tightly).
+- **Day-of-week breakdown** and a full offers table, filterable down to a specific day before departure by clicking the curve.
 
-```
-collect.py                       the whole collector
-requirements.txt                 dependencies
-data/flightdip.db                SQLite database, committed after each sweep
-.github/workflows/collect.yml    the schedule
-DECISIONS.md                     why any of this is the way it is
-```
-
-Each sweep is 60 API calls. SerpApi's free tier allows 250 searches/month and
-50/hour, so a sweep is split across runs (40, then 20, then a catch-up) and
-four sweeps come to 240/month.
-
-A single query returns Google's ~61-day price history for that flight, so one
-sweep yields roughly 3,600 price points rather than 60. That's what makes this
-viable on a free tier — see decision #2.
-
-### Tables
-
-- **`prices`** — the ~61-day daily price curve per flight, with
-  `days_before` departure precomputed. This is the table that answers the
-  question.
-- **`offers`** — live offers at collection time, with airline, stops, duration.
-- **`targets`** — the work queue that makes sweeps splittable and resumable.
-- **`runs`** — audit log, so gaps in the data are explainable.
+Every non-obvious choice behind how this works, and a couple of things I got wrong and fixed, is written up in **[DECISIONS.md](DECISIONS.md)**. That's honestly the part worth reading, not just the code.
 
 ---
 
-## Running it yourself
+## Try it yourself
+
+You don't need my data for this. Anyone can run it against their own routes.
+
+**1. Get a SerpApi key.**
+[serpapi.com](https://serpapi.com), sign up (free tier is roughly 100 to 250 searches a month, check your own dashboard), then copy your API key.
+
+**2. Clone and configure.**
 
 ```bash
 git clone https://github.com/YOURNAME/flightdip.git
 cd flightdip
 pip install -r requirements.txt
 
-cp .env.example .env     # then paste a SerpApi key into it
-CALL_BUDGET=2 python collect.py
+cp .env.example .env
 ```
 
-`CALL_BUDGET` caps how many API calls a run may make. Keep it low while
-testing — searches are the scarce resource, not time.
+Open `.env` and swap the placeholder for your real key.
+
+**3. Pick your own routes.**
+
+Open `collect.py` and find the `ROUTES` list near the top:
+
+```python
+ROUTES = [
+    ("MAN", "BKK"),
+    ("MAN", "AMS"),
+    ("MAN", "BCN"),
+    ("SIN", "JFK"),
+    ("SIN", "KUL"),
+]
+```
+
+Swap in whatever origin and destination pairs you actually care about (IATA airport codes). More routes means each one gets swept less often on a free tier quota, `DECISIONS.md` #3 has the actual arithmetic if you want to resize the schedule.
+
+**4. Test cheap, then collect for real.**
+
+```bash
+set CALL_BUDGET=2
+python collect.py
+```
+
+Two calls, just to prove your key and schema work before you spend real quota on it. Once that's clean, run it manually with a bigger budget, or push to your own GitHub and let `.github/workflows/collect.yml` handle it on a schedule.
+
+**5. Look at it.**
+
+```bash
+python export.py
+```
+
+Then open `dashboard/index.html` in a browser and load the `data/export.json` it just wrote.
+
+---
+
+## Repo structure
+
+```
+collect.py                       the collector, quota-safe and resumable
+export.py                        SQLite to JSON, with all the derived stats
+dashboard/index.html             the dashboard, open it directly, no server needed
+data/flightdip.db                the database, committed after every sweep
+.github/workflows/collect.yml    the automated schedule
+DECISIONS.md                     why every non-obvious choice was made
+```
 
 ---
 
 ## Roadmap
 
-- [x] Panel design: fixed monthly dates × 5 routes
-- [x] Quota-safe resumable sweeps
-- [x] Automated collection
-- [ ] Enough coverage to analyse
-- [ ] Does price actually fall as departure approaches, or is that a myth?
-- [ ] Optimal buy window per season, per route length
-- [ ] Charts and writeup
-- [ ] Public dashboard
+- [x] Panel design: fixed monthly dates across 5 routes, for seasonality and lead time in one dataset
+- [x] Quota-safe, resumable, automated collection
+- [x] Buy-timing curves with noise-resistant trend smoothing
+- [x] Value-of-time recommendations, calculated from real offer data
+- [x] Day-of-week breakdown
+- [ ] A full year of coverage across every route
+- [ ] A push notification, limit-order style, when a tracked flight drops below its own historical floor
+- [ ] Public write-up of what the first year of data actually shows
+
+---
+
+## Known limitations
+
+- **Single source.** Everything comes from Google Flights via SerpApi. Indicative, not bookable, and coverage varies by carrier.
+- **Sparse live offers.** Quota rotation means offers (airline, duration, stops) are sampled far less often than the price history curve.
+- **Value-of-time rates need enough same-month offers to calculate.** Early on, most months will just show an assumed fallback rate rather than one derived from real data. That's deliberate, see `DECISIONS.md` #12.
+- **No booking-class detail.** Cheapest available fare, no cabin or baggage normalisation.
+- **The database gets committed as a binary.** Fine at this size, would need rethinking well past where this currently sits.
 
 ---
 
