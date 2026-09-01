@@ -104,6 +104,7 @@
 
 <div id="drillView">
   <button id="backBtn">&larr; Back to seasonality</button>
+  <h2 id="drillMonthHeading" style="font-size:22px; font-weight:600; margin:0 0 4px;"></h2>
   <div class="stats">
     <div class="stat-card"><p>Best days-before (trend)</p><p id="statBest">-</p></div>
     <div class="stat-card"><p>Std deviation</p><p id="statStd">-</p></div>
@@ -166,6 +167,11 @@ const errorBarPlugin = {
 function monthLabel(dateStr) {
   const d = new Date(dateStr + 'T00:00:00');
   return d.toLocaleDateString('en-GB', { month: 'short', year: '2-digit' });
+}
+
+function fullMonthLabel(dateStr) {
+  const d = new Date(dateStr + 'T00:00:00');
+  return d.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
 }
 
 function movingAvg(vals, window) {
@@ -353,6 +359,8 @@ function drillInto(monthData) {
   document.getElementById('statBest').textContent = sorted[bestIdx].days_before + ' days out';
   document.getElementById('statStd').textContent = '£' + std;
   document.getElementById('statN').textContent = sorted.length;
+  document.getElementById('drillMonthHeading').textContent =
+    fullMonthLabel(monthData.departure_date) + ' \u00b7 ' + currentRoute;
   document.getElementById('drillTitle').textContent =
     currentRoute + ' departing ' + monthData.departure_date + ' - price vs days before departure';
 
