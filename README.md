@@ -1,19 +1,5 @@
 # FlightDip
 
-## Why this exists
-
-I graduated a few months ago. Since then it's been the usual grind: applications, assessments, interviews. But I wanted to actually build something too, not just prep for interviews about stuff I hadn't done yet.
-
-I fly between Manchester and Bangkok fairly often, and along the way I'd picked up all the usual flight price advice everyone repeats. Book six weeks out. Prices spike at weekends. Tuesdays are cheaper. I'd never actually checked any of it, so I decided to.
-
-The real question isn't "when is flying cheap." December is obviously more expensive than April, that's not a finding, that's just the calendar. The actual question only makes sense once you accept you're locked into a season:
-
-**Given I have to fly at a specific time of year, when's the right moment to buy, and what should I actually book once I do?**
-
-FlightDip is what came out of trying to answer that properly, with real data instead of guessing.
-
----
-
 ## What it does
 
 Five routes, tracked on the 15th of every month for the next year, swept automatically four times a month via GitHub Actions. Every sweep pulls both Google's backfilled price history and live flight offers (airline, duration, stops) for each tracked date.
